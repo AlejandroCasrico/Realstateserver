@@ -3,12 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://Alexcas01:alexcas01@clusterabc.vac34vy.mongodb.net/?retryWrites=true&w=majority');
 
+mongoose.connection.on('open', function(){
+  console.log("database connection")
+});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const config = require('./config').configuration;
 
+mongoose.connect(config.mongodb.url);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
