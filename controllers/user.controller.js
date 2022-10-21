@@ -33,6 +33,20 @@ async function createUser(req,res){
 
   
 }
+async function findUser(req,res){
+try {
+  const service = await User.find({
+
+  });
+  res.status(200).json({
+    message:'All users in DB:',
+    obj: newUser
+  })
+} catch (err) {
+  console.log('ERROR FINDING SERVICE');
+  
+}
+}
 module.exports={
-    createUser
+    createUser, findUser
 }
