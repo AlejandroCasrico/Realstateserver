@@ -5,14 +5,34 @@ async function createHouse(req,res){
     const location = req.body.lc;
     const price = req.body.prc;
     const type = req.body.tp;
+    const status = req.body.st;
+    const direction =req.body.dr;
+    const restrooms =req.body.rs;
+    const bedrooms =req.body.bd;
+    const state =req.body.tt;
+    const description = req.body.ds;
+    const  meters = req.body.ds;
+    const pets = req.body.pts;
+    const child= req.body.chd;
+
    
-    if(houseName && location && price && type){
+    if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
+      meters && pets && child){
         try{
       const  newHouse = await new House({
         houseName: houseName,
         location: location,
         price: price,
-        type: type
+        type: type,
+        status: status,
+        direction: direction,
+        restrooms: restrooms,
+        bedrooms: bedrooms,
+        state: state,
+        description: description,
+        meters: meters,
+        pets: pets,
+        child: child
       }).save();  
       res.status(200).json({
         message:'house created succesfull',
@@ -35,9 +55,9 @@ async function createHouse(req,res){
   
 }
 async function findHouse(req,res){
-  const location = req.body.lc;
   const price = req.body.prc;
   const type = req.body.tp;
+  const status= req.body.st;
 try {
   const service = await House.find({
 
@@ -48,10 +68,68 @@ try {
   })
 } catch (err) {
   console.log('ERROR FINDING SERVICE');
+  res.status(500).json({
+    message:'something happend when storing house',
+    obj:null
+})
+  }
   
 }
+
+
+async function UpdateHouse(req,res){
+  const houseName = req.body.hn;
+  const location = req.body.lc;
+  const price = req.body.prc;
+  const type = req.body.tp;
+  const status = req.body.st;
+  const direction =req.body.dr;
+  const restrooms =req.body.rs;
+  const bedrooms =req.body.bd;
+  const state =req.body.tt;
+  const description = req.body.ds;
+  const  meters = req.body.ds;
+  const pets = req.body.pts;
+  const child= req.body.chd;
+
+ 
+  if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
+    meters && pets && child){
+      try{
+    const service = await House.update({
+      houseName: houseName,
+      location: location,
+      price: price,
+      type: type,
+      status: status,
+      direction: direction,
+      restrooms: restrooms,
+      bedrooms: bedrooms,
+      state: state,
+      description: description,
+      meters: meters,
+      pets: pets,
+      child: child
+    }).save();  
+    res.status(200).json({
+      message:'house created succesfull',
+      obj: service
+    })
+    }catch (err){
+      console.error(err);
+      res.status(500).json({
+          message:'something happend when storing house',
+          obj:null
+      })
+    }
+  }else{
+      res.status(400).json({
+          message:" Some parameters were missing",
+          obj: null
+      })
+  }
 }
 
 module.exports={
-    createHouse, findHouse
+    createHouse, findHouse,UpdateHouse
 }

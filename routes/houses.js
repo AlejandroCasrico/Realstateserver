@@ -7,5 +7,5 @@ router.get('/', function(req, res, next) {
 });
 router.post('/createProperty',housecontroller.createHouse)
 router.get('/findProperty',housecontroller.findHouse)
-router.update('/updateProperty',housecontroller.updateHouse)
+router.update('/updateProperty',housecontroller.UpdateHouse)
 module.exports = router;

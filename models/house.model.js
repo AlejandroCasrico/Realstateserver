@@ -45,6 +45,20 @@ const HousesSchema = new mongoose.Schema({
         type: String,
         require:true
     },
+    pets:{
+        type:String,
+        require:true
+    },
+    child:{
+        type:String,
+        require:true  
+    },
+    extras:{
+
+    },
+    contact:{
+
+    },
     houseImage:{
         type:String,
         require:true    
