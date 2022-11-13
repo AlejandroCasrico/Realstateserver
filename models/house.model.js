@@ -65,7 +65,7 @@ const HousesSchema = new mongoose.Schema({
     }
     }
 );
-const Houses= mongoose.model('Houses',HouseSchema);
+const House= mongoose.model('Houses',HouseSchema);
 module.exports={
-    Houses
+    House
 }

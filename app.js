@@ -10,7 +10,7 @@ mongoose.connection.on('open', function(){
 });
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var housesRouter = require('/routes/houses')
+var housesRouter = require('./routes/houses');
 var app = express();
 const config = require('./config').configuration;
 const authRouter= require('./routes/auth');

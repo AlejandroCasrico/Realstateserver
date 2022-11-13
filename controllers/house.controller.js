@@ -1,4 +1,4 @@
-const House = require('../models/user.model').User;
+const House = require('../models/house.model').House;
 const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
 async function createHouse(req,res){
     const houseName = req.body.hn;
@@ -91,12 +91,10 @@ async function UpdateHouse(req,res){
   const  meters = req.body.ds;
   const pets = req.body.pts;
   const child= req.body.chd;
-
- 
   if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
     meters && pets && child){
       try{
-    const service = await House.update({
+    const service = await House.updateOne({
       houseName: houseName,
       location: location,
       price: price,
@@ -131,5 +129,5 @@ async function UpdateHouse(req,res){
 }
 
 module.exports={
-    createHouse, findHouse,UpdateHouse
+    createHouse, findHouse, UpdateHouse
 }
