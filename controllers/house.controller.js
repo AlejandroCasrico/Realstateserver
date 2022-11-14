@@ -1,5 +1,5 @@
 const House = require('../models/house.model').House;
-const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
+//const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
 async function createHouse(req,res){
     const houseName = req.body.hn;
     const location = req.body.lc;
@@ -108,7 +108,7 @@ async function UpdateHouse(req,res){
       meters: meters,
       pets: pets,
       child: child
-    }).save();  
+    })
     res.status(200).json({
       message:'house created succesfull',
       obj: service
