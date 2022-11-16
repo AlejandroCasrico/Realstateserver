@@ -1,7 +1,8 @@
 const House = require('../models/house.model').House;
 //const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
-console.log(createHouse)
+
 async function createHouse(req,res){
+  console.log(req.body)
     const houseName = req.body.name;
     const location = req.body.localizacion;
     const price = req.body.precio;
@@ -79,6 +80,7 @@ try {
 
 
 async function UpdateHouse(req,res){
+  console.log(req.body)
   const houseName = req.body.name;
   const location = req.body.localizacion;
   const price = req.body.precio;
@@ -111,7 +113,7 @@ async function UpdateHouse(req,res){
       child: child
     })
     res.status(200).json({
-      message:'house created succesfull',
+      message:'house updated succesfull',
       obj: service
     })
     }catch (err){

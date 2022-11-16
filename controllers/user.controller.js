@@ -58,7 +58,7 @@ try {
 async function loginUser (req,res){
 
   const loginMail = req.body.cor;
-  const loginPassword = req.body.pasw;
+  const loginPassword = req.body.pass;
 
   if (loginMail && loginPassword){
 
