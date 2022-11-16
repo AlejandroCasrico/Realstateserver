@@ -1,19 +1,20 @@
 const House = require('../models/house.model').House;
 //const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
+console.log(createHouse)
 async function createHouse(req,res){
-    const houseName = req.body.hn;
-    const location = req.body.lc;
-    const price = req.body.prc;
-    const type = req.body.tp;
-    const status = req.body.st;
-    const direction =req.body.dr;
-    const restrooms =req.body.rs;
-    const bedrooms =req.body.bd;
-    const state =req.body.tt;
-    const description = req.body.ds;
-    const  meters = req.body.ds;
-    const pets = req.body.pts;
-    const child= req.body.chd;
+    const houseName = req.body.name;
+    const location = req.body.localizacion;
+    const price = req.body.precio;
+    const type = req.body.tipo;
+    const status = req.body.estatus;
+    const direction =req.body.direccion;
+    const restrooms =req.body.baño;
+    const bedrooms =req.body.bed;
+    const state =req.body.estado;
+    const description = req.body.descripcion;
+    const  meters = req.body.metros;
+    const pets = req.body.mascota;
+    const child= req.body.niños;
 
    
     if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
@@ -55,9 +56,9 @@ async function createHouse(req,res){
   
 }
 async function findHouse(req,res){
-  const price = req.body.prc;
-  const type = req.body.tp;
-  const status= req.body.st;
+  const price = req.body.precio;
+  const type = req.body.tipo;
+  const status= req.body.estatus;
 try {
   const service = await House.find({
 
@@ -78,19 +79,19 @@ try {
 
 
 async function UpdateHouse(req,res){
-  const houseName = req.body.hn;
-  const location = req.body.lc;
-  const price = req.body.prc;
-  const type = req.body.tp;
-  const status = req.body.st;
-  const direction =req.body.dr;
-  const restrooms =req.body.rs;
-  const bedrooms =req.body.bd;
-  const state =req.body.tt;
-  const description = req.body.ds;
-  const  meters = req.body.ds;
-  const pets = req.body.pts;
-  const child= req.body.chd;
+  const houseName = req.body.name;
+  const location = req.body.localizacion;
+  const price = req.body.precio;
+  const type = req.body.tipo;
+  const status = req.body.estatus;
+  const direction =req.body.direccion;
+  const restrooms =req.body.restrooms;
+  const bedrooms =req.body.bed;
+  const state =req.body.estado;
+  const description = req.body.descripcion;
+  const  meters = req.body.metros;
+  const pets = req.body.mascota;
+  const child= req.body.niños;
   if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
     meters && pets && child){
       try{

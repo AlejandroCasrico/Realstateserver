@@ -53,18 +53,43 @@ const HousesSchema = new mongoose.Schema({
         type:String,
         require:true  
     },
-    extras:{
-
-    },
-    contact:{
-
-    },
+ 
     houseImage:{
         type:String,
-        require:true    
+        require:true  
     }
     }
 );
+  const ExtrasSchema = new mongoose.Schema({
+        laundry:{
+            type: String,
+            require: true
+        },
+        parking:{
+            type: String,
+            require: true
+        },
+        air_conditioner:{
+            type: String,
+            require:true
+        },
+        heating:{
+            type: String,
+            require: true
+        }
+        
+    });
+    const ContactSchema = new mongoose.Schema({
+        email:{
+            type: String,
+            require: true
+        },
+        cellphone:{
+            type: String,
+            require: true
+        }
+        
+    });
 const House= mongoose.model('Houses',HousesSchema);
 module.exports={
     House

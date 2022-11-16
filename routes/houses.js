@@ -6,6 +6,6 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/createProperty',housecontroller.createHouse)
-router.get('/findProperty',housecontroller.findHouse)
+router.post('/findProperty',housecontroller.findHouse)
 router.post('/updateProperty',housecontroller.UpdateHouse)
 module.exports = router;
