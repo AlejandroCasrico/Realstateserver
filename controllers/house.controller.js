@@ -57,6 +57,7 @@ async function createHouse(req,res){
   
 }
 async function findHouse(req,res){
+  console.log(req.body)
   const price = req.body.precio;
   const type = req.body.tipo;
   const status= req.body.estatus;
@@ -66,7 +67,7 @@ try {
   });
   res.status(200).json({
     message:'All houses in DB:',
-    obj: newHouse
+    obj: service
   })
 } catch (err) {
   console.log('ERROR FINDING SERVICE');
