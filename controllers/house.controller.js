@@ -4,26 +4,25 @@ const House = require('../models/house.model').House;
 async function createHouse(req,res){
   console.log(req.body)
     const houseName = req.body.name;
-    const location = req.body.localizacion;
     const price = req.body.precio;
     const type = req.body.tipo;
     const status = req.body.estatus;
     const direction =req.body.direccion;
-    const restrooms =req.body.baño;
+    const restrooms =req.body.restrooms;
     const bedrooms =req.body.bed;
     const state =req.body.estado;
     const description = req.body.descripcion;
     const  meters = req.body.metros;
-    const pets = req.body.mascota;
-    const child= req.body.niños;
+    const latitude = req.body.lat;
+    const longitude= req.body.lon;
+  
 
    
-    if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
-      meters && pets && child){
+    if(houseName && price && type&& status && direction && restrooms && bedrooms && state && description &&
+      meters && latitude && longitude ){
         try{
       const  newHouse = await new House({
         houseName: houseName,
-        location: location,
         price: price,
         type: type,
         status: status,
@@ -33,8 +32,9 @@ async function createHouse(req,res){
         state: state,
         description: description,
         meters: meters,
-        pets: pets,
-        child: child
+        latitude: latitude,
+        longitude: longitude
+        
       }).save();  
       res.status(200).json({
         message:'house created succesfull',
@@ -83,7 +83,8 @@ try {
 async function UpdateHouse(req,res){
   console.log(req.body)
   const houseName = req.body.name;
-  const location = req.body.localizacion;
+  const latitude = req.body.lat;
+  const longitude = req.body.lon;
   const price = req.body.precio;
   const type = req.body.tipo;
   const status = req.body.estatus;
@@ -93,14 +94,12 @@ async function UpdateHouse(req,res){
   const state =req.body.estado;
   const description = req.body.descripcion;
   const  meters = req.body.metros;
-  const pets = req.body.mascota;
-  const child= req.body.niños;
-  if(houseName && location && price && type&& status && direction && restrooms && bedrooms && state && description &&
-    meters && pets && child){
+
+  if(houseName  && price && type&& status && direction && restrooms && bedrooms && state && description &&
+    meters && latitude && longitude){
       try{
     const service = await House.updateOne({
       houseName: houseName,
-      location: location,
       price: price,
       type: type,
       status: status,
@@ -110,8 +109,10 @@ async function UpdateHouse(req,res){
       state: state,
       description: description,
       meters: meters,
-      pets: pets,
-      child: child
+      latitude: latitude,
+      longitude: longitude
+      
+      
     })
     res.status(200).json({
       message:'house updated succesfull',

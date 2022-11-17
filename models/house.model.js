@@ -1,7 +1,40 @@
 const mongoose = require('mongoose');
-const childSchema = new mongoose.Schema({ name: 'string' });
-// const ChildExtras = mongoose.model('ChildExtras', childSchema);
-// const ChildContact= mongoose.model('ChildContact', childSchema);
+ const childExtrasSchema = new mongoose.Schema(
+        {  
+        laundry:{
+            type: String,
+            require: true
+        },
+        parking:{
+            type: String,
+            require: true
+        },
+        air_conditioner:{
+            type: String,
+            require:true
+        },
+        heating:{
+            type: String,
+            require: true
+        }
+
+    }
+
+     )
+     const childLocationSchema = new mongoose.Schema(
+        {  
+        latitude:{
+            type: Number,
+            require: true
+        },
+        longitude:{
+            type: Number,
+            require: true
+        }
+
+    }
+
+     )
 const HousesSchema = new mongoose.Schema({
     houseName: {
         type:String,
@@ -16,24 +49,21 @@ const HousesSchema = new mongoose.Schema({
         require:true
     },
     price:{
-        type:String,
+        type:Number,
         require:true
     },
-    location:{
-        type:String,
-        require:true
-    },
+    
     direction:{
         type:String,
         require:true
 
     },
     restrooms:{
-        type: String,
+        type: Number,
         require:true
     },
     bedrooms:{
-        type: String,
+        type: Number,
         require:true
     },
     state:{
@@ -45,19 +75,12 @@ const HousesSchema = new mongoose.Schema({
         require:true
     },
     meters:{
-        type: String,
+        type: Number,
         require:true
     },
-    pets:{
-        type:String,
-        require:true
-    },
-    child:{
-        type:String,
-        require:true  
-    },
+  
     favorite:{
-        type:String,
+        type:Boolean,
         require:true  
     },
  
@@ -65,38 +88,12 @@ const HousesSchema = new mongoose.Schema({
         type:String,
         require:true  
     },
-    //  childExtras: {
-    //     ref: 'ChildExtras',
-    //     laundry:{
-    //         type: String,
-    //         require: true
-    //     },
-    //     parking:{
-    //         type: String,
-    //         require: true
-    //     },
-    //     air_conditioner:{
-    //         type: String,
-    //         require:true
-    //     },
-    //     heating:{
-    //         type: String,
-    //         require: true
-    //     }
-        
-    // },
-    // childContact :{
-    //     ref:'ChildContact',
-    //     email:{
-    //         type: String,
-    //         require: true
-    //     },
-    //     cellphone:{
-    //         type: String,
-    //         require: true
-    //     }
-        
-    // }
+   
+     childExtrasSchema:{
+         type:[childExtrasSchema],
+         require: true
+     },
+     
     }
 );
  
