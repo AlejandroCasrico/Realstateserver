@@ -187,7 +187,7 @@ async function deleteHouse(req,res){
 async function getAllHouses(req, res) {
   console.log(req.body)
 
-
+  const type = req.body.tipo;
   
       try{
     const service = await House.find({
