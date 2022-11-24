@@ -1,26 +1,26 @@
 const mongoose = require('mongoose');
- const childExtrasSchema = new mongoose.Schema(
-        {  
-        laundry:{
-            type: String,
-            require: true
-        },
-        parking:{
-            type: String,
-            require: true
-        },
-        air_conditioner:{
-            type: String,
-            require:true
-        },
-        heating:{
-            type: String,
-            require: true
-        }
+//  const childExtrasSchema = new mongoose.Schema(
+//         {  
+//         laundry:{
+//             type: String,
+//             require: true
+//         },
+//         parking:{
+//             type: String,
+//             require: true
+//         },
+//         air_conditioner:{
+//             type: String,
+//             require:true
+//         },
+//         heating:{
+//             type: String,
+//             require: true
+//         }
 
-    }
+//     }
 
-     )
+//      )
      const childLocationSchema = new mongoose.Schema(
         {  
         latitude:{
@@ -78,21 +78,25 @@ const HousesSchema = new mongoose.Schema({
         type: Number,
         require:true
     },
+    location:{
+        type:childLocationSchema,
+        require:true
+    }
   
-    favorite:{
-        type:Boolean,
-        require:true  
-    },
+    // favorite:{
+    //     type:Boolean,
+    //     require:true  
+    // },
  
-    houseImage:{
-        type:String,
-        require:true  
-    },
+    // houseImage:{
+    //     type:String,
+    //     require:true  
+    // },
    
-     childExtrasSchema:{
-         type:[childExtrasSchema],
-         require: true
-     },
+    //  childExtrasSchema:{
+    //      type:[childExtrasSchema],
+    //      require: true
+    //  },
      
     }
 );

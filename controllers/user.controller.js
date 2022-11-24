@@ -1,9 +1,9 @@
 const User = require('../models/user.model').User;
 async function createUser(req,res){
-    const firstName = req.body.fn;
-    const lastName = req.body.ln;
-    const password = req.body.pas;
-    const userName = req.body.un;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const password = req.body.password;
+    const userName = req.body.userName;
    
     if(firstName && lastName && userName && password){
         try{
@@ -37,9 +37,9 @@ async function findUser(req,res){
 try {
   const service = await User.find({
     firstName: firstName,
-    LastName: LastName,
-    UserName: UserName,
-    Password: Password
+    lastName: lastName,
+    userName: userName,
+    password:password
   }).save();
   res.status(200).json({
     message:'All users in DB:',
@@ -57,7 +57,7 @@ try {
 
 async function loginUser (req,res){
 
-  const loginMail = req.body.cor;
+  const loginMail = req.body.User;
   const loginPassword = req.body.pass;
 
   if (loginMail && loginPassword){
@@ -65,10 +65,11 @@ async function loginUser (req,res){
 
       try{
           const loginUser = await User.findOne ({                
-              Mail: loginMail,
-              Password: loginPassword
+              userName: loginMail,
+              password: loginPassword
 
           }); 
+          console.log(loginUser)
           //validacion
           if (loginUser){
 
