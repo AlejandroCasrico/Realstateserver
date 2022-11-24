@@ -8,5 +8,6 @@ router.get('/', function(req, res, next) {
 router.post('/createProperty',housecontroller.createHouse)
 router.post('/findProperty',housecontroller.findHouse)
 router.post('/updateProperty',housecontroller.UpdateHouse)
+router.post('/getProperty',housecontroller.getAllHouses)
 router.post('/deleteProperty',housecontroller.deleteHouse)
 module.exports = router;
