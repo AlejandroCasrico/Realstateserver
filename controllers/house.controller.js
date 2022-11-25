@@ -12,7 +12,7 @@ async function createHouse(req,res){
     const bedrooms =req.body.bed;
     const state =req.body.estado;
     const description = req.body.descripcion;
-    const  meters = req.body.metros;
+    const meters = req.body.metros;
     const location = req.body.location;
   
 
@@ -57,11 +57,37 @@ async function createHouse(req,res){
 }
 async function findHouse(req,res){
   console.log(req.body)
+  const minPrice = req.body.minPrice;
+  const maxPrice = req.body.maxPrice;
   const price = req.body.precio;
   const type = req.body.tipo;
   const status= req.body.estatus;
+  
+
+  let query ={}
+  if(price || type || status){
+    query = {$and: []};
+    if (type) {
+      query["$and"].push({type: type});
+    }
+
+    if (status) {
+      query["$and"].push({status: status});
+    }
+
+    if (minPrice) {
+      query["$and"].push({price: {"$gte": minPrice}});
+    }
+    if (maxPrice) {
+      query["$and"].push({price: {"$lte": maxPrice}})
+    }
+   
+  }   else {
+    query = {};
+  }
+
 try {
-  const service = await House.findOne({
+  const service = await House.find({
 
   });
   res.status(200).json({
@@ -134,35 +160,35 @@ async function UpdateHouse(req,res){
 
 async function deleteHouse(req,res){
   console.log(req.body)
-  const houseName = req.body.name;
-  const latitude = req.body.lat;
-  const longitude = req.body.lon;
-  const price = req.body.precio;
-  const type = req.body.tipo;
-  const status = req.body.estatus;
-  const direction =req.body.direccion;
-  const restrooms =req.body.restrooms;
-  const bedrooms =req.body.bed;
-  const state =req.body.estado;
-  const description = req.body.descripcion;
-  const  meters = req.body.metros;
+  // const houseName = req.body.name;
+  // const latitude = req.body.lat;
+  // const longitude = req.body.lon;
+  // const price = req.body.precio;
+  // const type = req.body.tipo;
+  // const status = req.body.estatus;
+  // const direction =req.body.direccion;
+  // const restrooms =req.body.restrooms;
+  // const bedrooms =req.body.bed;
+  // const state =req.body.estado;
+  // const description = req.body.descripcion;
+  // const  meters = req.body.metros;
 
   if(houseName  && price && type&& status && direction && restrooms && bedrooms && state && description &&
     meters && latitude && longitude){
       try{
     const service = await House.deleteOne({
       houseName: houseName,
-      price: price,
-      type: type,
-      status: status,
-      direction: direction,
-      restrooms: restrooms,
-      bedrooms: bedrooms,
-      state: state,
-      description: description,
-      meters: meters,
-      latitude: latitude,
-      longitude: longitude
+      // price: price,
+      // type: type,
+      // status: status,
+      // direction: direction,
+      // restrooms: restrooms,
+      // bedrooms: bedrooms,
+      // state: state,
+      // description: description,
+      // meters: meters,
+      // latitude: latitude,
+      // longitude: longitude
       
       
     })
@@ -186,8 +212,6 @@ async function deleteHouse(req,res){
 } 
 async function getAllHouses(req, res) {
   console.log(req.body)
-
-  const type = req.body.tipo;
   
       try{
     const service = await House.find({
