@@ -1,4 +1,51 @@
 const mongoose = require('mongoose');
+
+const childLocationSchema = new mongoose.Schema(
+    {  
+    latitude:{
+        type: Number,
+        require: true
+    },
+    longitude:{
+        type: Number,
+        require: true
+    }
+
+}
+
+ )
+ const childProfileSchema = new mongoose.Schema(
+    {  
+    userName:{
+        type: String,
+        require: true
+    },
+    age:{
+        type: String,
+        require: true
+    },
+    mail:{
+        type:String,
+        require: true
+    }
+
+}
+
+ )
+ const childContactSchema = new mongoose.Schema(
+    {  
+    celphone:{
+        type: Number,
+        require: true
+    },
+    mail:{
+        type: String,
+        require: true
+    }
+
+}
+
+ )
 const UserSchema = new mongoose.Schema({
     firstName: {
         type:String,
@@ -18,8 +65,26 @@ const UserSchema = new mongoose.Schema({
     },
     profileImage:{
         type:String
-    
-      
+    },
+    curp:{
+        type:String,
+        require:String
+    },
+    location:{
+        type:childLocationSchema,
+        require:true
+    },
+    sellOrRent:{
+        type:Number,
+        require:true
+    },
+    profile:{
+        type: childProfileSchema,
+        require:true
+    },
+    contact:{
+        type:childContactSchema,
+        require:true
     }
     }
 );
