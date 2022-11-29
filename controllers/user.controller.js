@@ -72,7 +72,7 @@ async function findUser(req,res){
   }
 
 try {
-  const service = await House.findOne(query);
+  const service = await House.find(query);
   res.status(200).json({
     message:'All users in DB:',
     obj: service
@@ -130,6 +130,54 @@ async function loginUser (req,res){
   }
 
 }
+async function registerUser (req,res){
+
+  const RegisterMail = req.body.User;
+  const RegisterPassword = req.body.pass;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+
+  if (RegisterMail && RegisterPassword && firstName && lastName){
+
+
+      try{
+          const regisUser = await User.findOne ({                
+              userName: RegisterMail,
+              password: RegisterPassword,
+              firstName: firstName,
+              lastName: lastName
+
+          }); 
+          console.log(regisUser)
+          //validacion
+          if (regisUser){
+
+              res.status(200).json({
+                  message:"Register User succesfully ",
+                  obj: loginUser
+              })
+          }else{//error usuario
+              res.status(400).json({
+                  message:"credenciales incorectas",
+                  obj:null
+              })
+          }
+          //error interno
+      }catch (err) {
+          console.error(err);
+          res.status(500).json({
+              message: "Error interno",
+              obj:null
+          })
+      } 
+  }else{//ausencia parametros peticion
+  res.status(400).json({
+      message: "Faltan parametros en la peticion",
+      obj:null
+  })
+  }
+
+}
 module.exports={
-    createUser, findUser,loginUser
+    createUser, findUser,loginUser, registerUser
 }

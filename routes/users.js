@@ -8,4 +8,5 @@ router.get('/', function(req, res, next) {
 router.post('/create',usercontroller.createUser)
 router.post('/find',usercontroller.findUser)
 router.post('/login',usercontroller.loginUser)
+router.post('/register',usercontroller.registerUser)
 module.exports = router;
