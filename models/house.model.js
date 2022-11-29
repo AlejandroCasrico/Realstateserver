@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
  const childExtrasSchema = new mongoose.Schema(
         {  
         laundry:{
-            type: String,
+            type: Boolean,
             require: true
         },
         parking:{
-            type: String,
+            type: Boolean,
             require: true
         },
         air_conditioner:{
-            type: String,
+            type: Boolean,
             require:true
         },
         heating:{
-            type: String,
+            type: Boolean,
             require: true
         }
 

@@ -3,7 +3,7 @@ const House = require('../models/house.model').House;
 
 async function createHouse(req,res){
   console.log(req.body)
-  const _id =req.body._id;
+ 
     const houseName = req.body.houseName;
     const price = req.body.price;
     const type = req.body.type;
@@ -19,11 +19,11 @@ async function createHouse(req,res){
   
 
    
-    if( _id && houseName && price && type&& status && direction && restrooms && bedrooms && state && description &&
+    if(  houseName && price && type&& status && direction && restrooms && bedrooms && state && description &&
       meters && location&& extras ){
         try{
       const  newHouse = await new House({
-        _id:_id,
+        
         houseName: houseName,
         price: price,
         type: type,
