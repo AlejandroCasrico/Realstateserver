@@ -3,7 +3,7 @@ async function createUser(req,res){
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.pass;
-    const userName = req.body.userName;
+    const userName = req.body.User;
     const curp = req.body.curp;
     const sellOrRent = req.body.sellOrRent;
     const location = req.body.location;
