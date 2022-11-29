@@ -50,8 +50,6 @@ async function findUser(req,res){
   const lastName = req.body.lastName;
   const userName= req.body.userName;
 
-  
-
   let query ={}
   if(firstName || lastName || userName){
     query = {$and: []};
@@ -72,10 +70,10 @@ async function findUser(req,res){
   }
 
 try {
-  const service = await House.find(query);
+  const user = await User.find(query);
   res.status(200).json({
     message:'All users in DB:',
-    obj: service
+    obj: user
   })
 } catch (err) {
   console.log('ERROR FINDING USER SERVICE');
