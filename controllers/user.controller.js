@@ -4,14 +4,24 @@ async function createUser(req,res){
     const lastName = req.body.lastName;
     const password = req.body.password;
     const userName = req.body.userName;
+    const curp = req.body.curp;
+    const sellOrRent = req.body.sellOrRent;
+    const location = req.body.location;
+    const profile = req.body.profile;
+    const contact = req.body.contact;
    
-    if(firstName && lastName && userName && password){
+    if(firstName && lastName && userName && password && curp && sellOrRent &&location && profile && contact){
         try{
       const  newUser =await new User({
         firstName: firstName,
         lastName: lastName,
         password: password,
-        userName: userName
+        userName: userName,
+        sellOrRent: sellOrRent,
+        curp:curp,
+        location:location,
+        profile:profile,
+        contact
       }).save();  
       res.status(200).json({
         message:'user created!',
@@ -33,28 +43,49 @@ async function createUser(req,res){
 
   
 }
+
 async function findUser(req,res){
+  console.log(req.body)
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const userName= req.body.userName;
+
+  
+
+  let query ={}
+  if(firstName || lastName || userName){
+    query = {$and: []};
+    if (firstName) {
+      query["$and"].push({firstName: firstName});
+    }
+
+    if (lastName) {
+      query["$and"].push({lastName: lastName});
+    }
+
+    if (userName) {
+      query["$and"].push({userName:  userName});
+    }
+   
+  }   else {
+    query = {};
+  }
+
 try {
-  const service = await User.find({
-    firstName: firstName,
-    lastName: lastName,
-    userName: userName,
-    password:password
-  }).save();
+  const service = await House.findOne(query);
   res.status(200).json({
     message:'All users in DB:',
-    obj: newUser
+    obj: service
   })
 } catch (err) {
-  console.error(err);
+  console.log('ERROR FINDING USER SERVICE');
   res.status(500).json({
-      message: "user finded!",
-      obj:null
-  })
+    message:'something happend when finding user',
+    obj:null
+})
+  }
   
 }
-}
-
 async function loginUser (req,res){
 
   const loginMail = req.body.User;
