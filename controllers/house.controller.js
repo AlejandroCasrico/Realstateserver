@@ -15,11 +15,12 @@ async function createHouse(req,res){
     const description = req.body.description;
     const meters = req.body.meters;
     const location = req.body.location;
+    const extras = req.body.extras;
   
 
    
     if( _id && houseName && price && type&& status && direction && restrooms && bedrooms && state && description &&
-      meters && location ){
+      meters && location&& extras ){
         try{
       const  newHouse = await new House({
         _id:_id,
@@ -33,7 +34,8 @@ async function createHouse(req,res){
         state: state,
         description: description,
         meters: meters,
-        location: location
+        location: location,
+        extras: extras
         
         
       }).save();  
