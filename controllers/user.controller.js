@@ -2,8 +2,8 @@ const User = require('../models/user.model').User;
 async function createUser(req,res){
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const password = req.body.pass;
-    const userName = req.body.User;
+    const password = req.body.password;
+    const userName = req.body.userName;
     const curp = req.body.curp;
     const sellOrRent = req.body.sellOrRent;
     const location = req.body.location;
@@ -21,7 +21,7 @@ async function createUser(req,res){
         curp:curp,
         location:location,
         profile:profile,
-        contact
+        contact:contact
       }).save();  
       res.status(200).json({
         message:'user created!',
@@ -88,8 +88,8 @@ try {
 }
 async function loginUser (req,res){
 
-  const loginMail = req.body.User;
-  const loginPassword = req.body.pass;
+  const loginMail = req.body.userName;
+  const loginPassword = req.body.password;
 
   if (loginMail && loginPassword){
 
