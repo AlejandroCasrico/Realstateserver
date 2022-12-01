@@ -8,5 +8,7 @@ router.get('/', function(req, res, next) {
 router.post('/create',usercontroller.createUser)
 router.post('/find',usercontroller.findUser)
 router.post('/login',usercontroller.loginUser)
-
+router.post('/update',usercontroller.UpdateUser)
+router.post('/delete',usercontroller.deleteUser)
+router.post('/deleteMany',usercontroller.deleteManyUsers)
 module.exports = router;

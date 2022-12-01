@@ -1,5 +1,5 @@
 const House = require('../models/house.model').House;
-//const redisUrl='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
+const url='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
 
 async function createHouse(req,res){
   console.log(req.body)
@@ -163,12 +163,12 @@ async function UpdateHouse(req,res){
 
 async function deleteHouse(req,res){
   console.log(req.body)
-   const houseName = req.body.houseName;
-   if(houseName){
+   const _id = req.body._id;
+   if(_id){
       try{
     const service = await House.deleteOne({
-      houseName: houseName
-    })
+      _id: _id
+    });
     res.status(200).json({
       message:'house deleted succesfull',
       obj: service
