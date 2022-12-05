@@ -10,5 +10,5 @@ router.post('/find',usercontroller.findUser)
 router.post('/login',usercontroller.loginUser)
 router.post('/update',usercontroller.UpdateUser)
 router.post('/delete',usercontroller.deleteUser)
-router.post('/deleteMany',usercontroller.deleteManyUsers)
+router.post('/deleteUsers',usercontroller.deleteManyUsers)
 module.exports = router;

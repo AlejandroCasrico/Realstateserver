@@ -14,6 +14,7 @@ const childLocationSchema = new mongoose.Schema(
 }
 
  )
+ childLocationSchema.index({ latitude: 1, longitude: 1 }, { index: true })
  const childProfileSchema = new mongoose.Schema(
     {  
     userName:{
@@ -32,6 +33,8 @@ const childLocationSchema = new mongoose.Schema(
 }
 
  )
+childProfileSchema.index({ userName: 1, age: 1, mail:1 }, { unique: true })
+
  const childContactSchema = new mongoose.Schema(
     {  
     cellphone:{
@@ -46,7 +49,11 @@ const childLocationSchema = new mongoose.Schema(
 }
 
  )
+ childContactSchema.index({mail:{type:String, sparse:true}});
+ childContactSchema.index({cellphone:{type:String, index:true}});
+ 
 const UserSchema = new mongoose.Schema({
+   
     firstName: {
         type:String,
         require: true
@@ -88,6 +95,11 @@ const UserSchema = new mongoose.Schema({
     }
     }
 );
+  UserSchema.index({firstName:1});
+  UserSchema.index({lastName:{type:String, index:true}});
+  UserSchema.index({password:{type:String, index:true}});
+  UserSchema.index({userName:{type:String, unique:true}});
+  UserSchema.index({curp:{type:String, unique:true}});
 const User= mongoose.model('User',UserSchema);
 module.exports={
     User

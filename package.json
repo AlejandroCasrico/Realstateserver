@@ -16,6 +16,7 @@
     "express-basic-auth": "^1.2.1",
     "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
+    "ioredis": "^5.2.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "morgan": "~1.9.1",

@@ -9,4 +9,6 @@ router.post('/createProperty',housecontroller.createHouse)
 router.post('/findProperty',housecontroller.findHouse)
 router.post('/updateProperty',housecontroller.UpdateHouse)
 router.post('/deleteProperty',housecontroller.deleteHouse)
+router.post('/removeProperty',housecontroller.RemoveHouses)
+router.post('/delcertainProperty',housecontroller.DeleteCertainHouses)
 module.exports = router;

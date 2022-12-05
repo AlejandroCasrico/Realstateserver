@@ -1,9 +1,12 @@
 const House = require('../models/house.model').House;
-const url='redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
+const redisURI='redis://redis-11464.c60.us-west-1-2.ec2.cloud.redislabs.com:11464'
+const clientRedis = require('redis').createClient({url: redisURI});
+clientRedis.on('error', (err) => console.log('Redis Client Error', err));
+clientRedis.connect();
 
 async function createHouse(req,res){
   console.log(req.body)
- 
+
     const houseName = req.body.houseName;
     const price = req.body.price;
     const type = req.body.type;
@@ -15,10 +18,7 @@ async function createHouse(req,res){
     const description = req.body.description;
     const meters = req.body.meters;
     const location = req.body.location;
-    const extras = req.body.extras;
-  
-
-   
+    const extras = req.body.extras;   
     if(  houseName && price && type&& status && direction && restrooms && bedrooms && state && description &&
       meters && location&& extras ){
         try{
@@ -92,10 +92,17 @@ async function findHouse(req,res){
 
 try {
   const service = await House.find(query);
+  House.forEach(element => {
+    console.log(JSON.stringify(element._id).replaceAll('"',''));
+    clientRedis.set(JSON.stringify(element._id).replaceAll('"',''),JSON.stringify(element));/*, {
+        EX: 10,
+        NX: true});*/
+});
   res.status(200).json({
     message:'All houses in DB:',
     obj: service
   })
+  
 } catch (err) {
   console.log('ERROR FINDING SERVICE');
   res.status(500).json({
@@ -187,7 +194,51 @@ async function deleteHouse(req,res){
       })
   }
 } 
-
+async function RemoveHouses(req,res){
+  console.log(req.body)
+   
+      try{
+    const service = await House.deleteMany({
+      $and: [{ 
+        restrooms: { $gte: 10 } }, 
+        { restrooms: { $lt: 2 } }]
+    });
+    res.status(200).json({
+      message:'houses removed succesfull',
+      obj: service
+    })
+    }catch (err){
+      console.error(err);
+      res.status(500).json({
+          message:'something happend when removing all houses',
+          obj:null
+      })
+    }
+ 
+} 
+async function DeleteCertainHouses(req,res){
+  console.log(req.body)
+   
+      try{
+    const service = await House.findOneAndDelete({
+      $or: [{
+         bedrooms: { $eq:0} }, 
+         { price: {$lt:500} }, 
+         { meters:{$in:[0,99]} }]
+    });
+    res.status(200).json({
+      message:'certain houses  deleted succesfull',
+      obj: service
+    })
+    }catch (err){
+      console.error(err);
+      res.status(500).json({
+          message:'something happend when deleting all houses',
+          obj:null
+      })
+    }
+ 
+} 
 
 
 module.exports={
@@ -195,5 +246,7 @@ module.exports={
     findHouse, 
     UpdateHouse, 
     deleteHouse,
+    RemoveHouses,
+    DeleteCertainHouses
 
 }

@@ -21,6 +21,10 @@ const mongoose = require('mongoose');
     }
 
      )
+       childExtrasSchema.index({laundry:{type:Boolean, sparse:true}});
+       childExtrasSchema.index({parking:{type:Boolean, sparse:true}});
+       childExtrasSchema.index({air_conditioner:{type:Boolean, sparse:true}});
+       childExtrasSchema.index({heating:{type:Boolean, sparse:true}});
      const childLocationSchema = new mongoose.Schema(
         {  
         latitude:{
@@ -35,6 +39,7 @@ const mongoose = require('mongoose');
     }
 
      )
+     childLocationSchema.index({ latitude: 1, longitude: 1}, { index: true })
 const HousesSchema = new mongoose.Schema({
     houseName: {
         type:String,
@@ -83,15 +88,15 @@ const HousesSchema = new mongoose.Schema({
         require:true
     },
   
-    // favorite:{
-    //     type:Boolean,
-    //     require:true  
-    // },
+     favorite:{
+         type:Boolean,
+         require:true  
+    },
  
-    // houseImage:{
-    //     type:String,
-    //     require:true  
-    // },
+     houseImage:{
+         type:String,
+         require:true  
+    },
    
      extras:{
          type:[childExtrasSchema],
@@ -100,7 +105,11 @@ const HousesSchema = new mongoose.Schema({
      
     }
 );
- 
+
+HousesSchema.index({houseName:1});
+HousesSchema.index({type:{type:String, index:true}});
+HousesSchema.index({status:{type:String, index:true}});
+HousesSchema.index({price:{type:Number, index:true}});
 const House= mongoose.model('Houses',HousesSchema);
 module.exports={
     House

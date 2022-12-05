@@ -23,9 +23,6 @@ mongoose.connect(databaseUrl);
 mongoose.connection.on('open', function(){
   console.log("database connection")
 });
-// createClient({
-//   url: 'redis-13416.c60.us-west-1-2.ec2.cloud.redislabs.com:13416'
-// });
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

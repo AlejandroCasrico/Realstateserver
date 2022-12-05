@@ -137,10 +137,7 @@ async function loginUser (req,res){
 
   const loginMail = req.body.userName;
   const loginPassword = req.body.password;
-
   if (loginMail && loginPassword){
-
-
       try{
           const loginUser = await User.findOne ({                
               userName: loginMail,
@@ -208,7 +205,7 @@ async function deleteManyUsers(req,res){
    
       try{
     const service = await User.deleteMany({
-      age: {
+      "profile.age": {
         $lt:18
       }
     });
