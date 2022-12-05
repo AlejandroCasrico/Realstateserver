@@ -92,12 +92,12 @@ async function findHouse(req,res){
 
 try {
   const service = await House.find(query);
-  House.forEach(element => {
-    console.log(JSON.stringify(element._id).replaceAll('"',''));
-    clientRedis.set(JSON.stringify(element._id).replaceAll('"',''),JSON.stringify(element));/*, {
-        EX: 10,
-        NX: true});*/
-});
+//   House.forEach(element => {
+//     console.log(JSON.stringify(element._id).replaceAll('"',''));
+//     clientRedis.set(JSON.stringify(element._id).replaceAll('"',''),JSON.stringify(element));/*, {
+//         EX: 10,
+//         NX: true});*/
+// });
   res.status(200).json({
     message:'All houses in DB:',
     obj: service
