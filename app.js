@@ -5,16 +5,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-// const redis = require("redis");
-// const client = redis.createClient();
-// client.on("error",function(error){
-//   console.log(error);
-// });
-// client.set("key","info");
-// client.get("key","info");
-// client.get("key",function(err,info){
-//   console.log(info);
-// })
  const databaseUrl = "mongodb+srv://Alexcas01:alexcas01@clusterabc.vac34vy.mongodb.net/?retryWrites=true&w=majority"
 const databaseOptions ={
   useNewUrlParse: true

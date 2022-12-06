@@ -11,4 +11,6 @@ router.post('/updateProperty',housecontroller.UpdateHouse)
 router.post('/deleteProperty',housecontroller.deleteHouse)
 router.post('/removeProperty',housecontroller.RemoveHouses)
 router.post('/delcertainProperty',housecontroller.DeleteCertainHouses)
+router.post('/findFav',housecontroller.findFavorite)
+router.post('/deleteFav',housecontroller.deleteFav)
 module.exports = router;

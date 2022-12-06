@@ -66,8 +66,6 @@ async function findHouse(req,res){
   const price = req.body.price;
   const type = req.body.type;
   const status= req.body.status;
-  
-
   let query ={}
   if(price || type || status){
     query = {$and: []};
@@ -89,7 +87,6 @@ async function findHouse(req,res){
   }   else {
     query = {};
   }
-
 try {
   const service = await House.find(query);
 //   House.forEach(element => {
@@ -112,6 +109,7 @@ try {
   }
   
 }
+
 
 
 async function UpdateHouse(req,res){
@@ -167,7 +165,58 @@ async function UpdateHouse(req,res){
       })
   }
 } 
-
+async function findFavorite(req,res){
+  console.log(req.body)
+   const _id = req.body._id;
+   if(_id){
+      try{
+    const service = await House.findOne({
+      _id: _id
+    });
+    res.status(200).json({
+      message:'favorite house find succesfull',
+      obj: service
+    })
+    }catch (err){
+      console.error(err);
+      res.status(500).json({
+          message:'something happend when finding fav house',
+          obj:null
+      })
+    }
+  }else{
+      res.status(400).json({
+          message:" Some parameters were missing",
+          obj: null
+      })
+  }
+} 
+async function deleteFav(req,res){
+  console.log(req.body)
+   const _id = req.body._id;
+   if(_id){
+      try{
+    const service = await House.deleteOne({
+      _id: _id
+    });
+    res.status(200).json({
+      message:' Fav house deleted succesfull',
+      obj: service
+    })
+    }catch (err){
+      console.error(err);
+      res.status(500).json({
+          message:'something happend when deleting fav house',
+          obj:null
+      })
+    }
+  }else{
+      res.status(400).json({
+          message:" Some parameters were missing",
+          obj: null
+      })
+  }
+} 
 async function deleteHouse(req,res){
   console.log(req.body)
    const _id = req.body._id;
@@ -247,6 +296,8 @@ module.exports={
     UpdateHouse, 
     deleteHouse,
     RemoveHouses,
-    DeleteCertainHouses
+    DeleteCertainHouses,
+    findFavorite,
+    deleteFav
 
 }
