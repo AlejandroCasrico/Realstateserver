@@ -20,19 +20,6 @@ var housesRouter = require('./routes/houses');
 var app = express();
 const config = require('./config').configuration;
 const authRouter= require('./routes/auth');
-// jwt
-// const jwt = require ('jsonwebtoken');
-// const privateKey = "secretKey";
-// const payload ={
-//   name : "",
-//   profile:"GUEST",
-//   exp:1516239022
-// };
-// try {
-//   const newToken =await jwt.sign(payload,privateKey,{algorithm:'RS256'});
-// } catch (err) {
-//   console.log("JWT ERROR")
-// }
 // view engine setup
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));

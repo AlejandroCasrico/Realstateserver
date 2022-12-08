@@ -1,7 +1,7 @@
 const House = require('../models/house.model').House;
 const redisURI='redis://redis-11464.c60.us-west-1-2.ec2.cloud.redislabs.com:11464'
 const clientRedis = require('redis').createClient({url: redisURI});
-clientRedis.on('error', (err) => console.log('Redis Client Error', err));
+clientRedis.on('error', function(error){console.error(error);});
 clientRedis.connect();
 
 async function createHouse(req,res){
@@ -89,12 +89,10 @@ async function findHouse(req,res){
   }
 try {
   const service = await House.find(query);
-//   House.forEach(element => {
-//     console.log(JSON.stringify(element._id).replaceAll('"',''));
-//     clientRedis.set(JSON.stringify(element._id).replaceAll('"',''),JSON.stringify(element));/*, {
-//         EX: 10,
-//         NX: true});*/
-// });
+clientRedis.set("key","info");
+clientRedis.get("key",function(err,info){
+  console.log(info)
+})
   res.status(200).json({
     message:'All houses in DB:',
     obj: service
